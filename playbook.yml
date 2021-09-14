@@ -1,14 +1,31 @@
 ---
+# Setup LAMP Stack
 - hosts: ansible2-test
   tasks:
-    - name: Install LAMP stack using Ansible
+    - name: install lamp stack
       become: yes
+      become_user: root
       apt:
-        name: "{{ packages }}"
+        pkg:
+          - apache2
+          - mysql-server
+          - php
         state: present
-      vars:
-        packages:
-           - apache2
-           - mysql-server
-           - php
+        update_cache: yes
+
+    - name: start apache service
+      become: yes
+      become_user: root
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: start mysql service
+      become: yes
+      become_user: root
+      service:
+        name: mysql
+        state: started
+        enabled: yes
 ~                     
