@@ -1,10 +1,9 @@
 ---
-  -hosts: ansible2-test
-   become: yes
-   tasks:
-     - name: Install LAMP stack using Ansible
-       become: yes
-       apt:
+- hosts: ansible2-test
+  tasks:
+    - name: Install LAMP stack using Ansible
+      become: yes
+      apt:
         name: "{{ packages }}"
         state: present
       vars:
@@ -12,3 +11,4 @@
            - apache2
            - mysql-server
            - php
+~                     
